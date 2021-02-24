@@ -8,7 +8,8 @@ export function Profile() {
         <strong>Maria Clara Rubinger</strong>
         <p>
           <img src="icons/level.svg" alt="Level" />
-          Level 1</p>
+          Level 1
+        </p>
       </div>
     </div>
   );
