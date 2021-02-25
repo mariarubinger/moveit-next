@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 import challenges from '../../challenges.json';
 
 /* vai definir o tipo que tenho dentro do meu objeto  */
@@ -40,6 +40,13 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
 
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2) /* cáclulo que os rpgs usam para cálculo de level - nesse caso usei potência */
 
+
+  /* Notificação */
+  /* sempre que você ver um useEffect que o segundo parametro dele vazio quer dizer a primeira função dele sera executada apenas uma unica vez */
+  useEffect(() => {
+    Notification.requestPermission(); /* API do proprio browser */
+  }, [])
+
   function levelUp() {
     setLevel(level + 1);
   }
@@ -51,6 +58,16 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
     const challenge = challenges[randonChallengeIndex];
 
     setActiveChallenge(challenge)
+
+    /* Tocando áudio no desafio */
+    new Audio('/notification.mp3').play();
+
+    /* se o usuário permitiu as notificações, então: */
+    if (Notification.permission === 'granted') {
+      new Notification('Novo desafio 🎉', {
+        body: `Valendo ${challenge.amount}xp!`
+      })
+    }
   }
 
   function resetChallenge() {
