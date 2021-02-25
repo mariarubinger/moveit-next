@@ -17,3 +17,5 @@ function MyApp({ Component, pageProps }) {
 export default MyApp
 
 /* pode enviar um objeto dentro do value ou uma função */
+
+/* o app vai incorporar todo o código que tem aqui */
