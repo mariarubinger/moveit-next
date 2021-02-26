@@ -22,7 +22,7 @@ let countdownTimeout: NodeJS.Timeout;
 export function CountdownProvider({ children }: CountdownProviderProps) {
   const { startNewChallenge } = useContext(ChallengesContext);
 
-  const [time, setTime] = useState(0.1 * 60); /* multiplica por 60 pra representar em segundos */
+  const [time, setTime] = useState(25 * 60); /* multiplica por 60 pra representar em segundos */
   const [isActive, setIsActive] = useState(false); /* no começo não vai estar ativo, o usuário precisa clicar no botão pra iniciar  */
   const [hasFinished, setHasFinished] = useState(false); /* finalizou - quando o contador chega em 00:00 */
 
@@ -37,7 +37,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     clearTimeout(countdownTimeout);
     setIsActive(false); /* o IsActive vai parar */
     setHasFinished(false);
-    setTime(0.1 * 60);
+    setTime(25 * 60);
   }
 
   useEffect(() => {
