@@ -71,5 +71,4 @@ export function ChallengeBox() {
     <div>
     </div>
   ) }
-
 */
