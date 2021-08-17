@@ -1,0 +1,583 @@
+NLW #4 Rocketseat - Rumo ao Próximo Nível [ReactJS]
+22 a 26 de fevereiro de 2021
+
+MOVE IT
+____________________________________________________
+
+>>>>>> DAY 01 <<<<<<
+
+Instalar o npm e o node;
+Instalar yarn (ele auxilia na instalação de pacotes, bibliotecas);
+O Yarn tem uma funcionalidades que o npm não tem, e é mais performático.
+Configurar o VSCode;
+Apresentação do projeto pelo FIGMA.
+
+#Fluxo de uma API
+API com toda a parte de html, 
+
+Uma aplicação em Node.js, aí o Browser fazia uma requisição e o Node.js (API) retornava toda a parte HTML, CSS, JS, só o Browser que consegue ler esses três.
+Na aplicação mobile, ele não entende o HTML, CSS, JS, aí antigamente tinha que criar duas rotas e o backend era responsável por tudo.
+
+Conceito utilizado hoje em dia => API Rest
+O JSON (JavaScriptObject Notation) é uma estrutura
+universal, entendida por todos os clientes (Browser ou Swift)
+
+Toda a interface vai ser criada pelo Browser
+Todo o código do React não precisa ir pra um servidor como o Node, ele vai estar disponível pra ser usado pelo Browser bem performático
+
+
+#O que é React?
+É uma biblioteca JavaScript de código aberto com foco em criar
+interfaces de usuário em páginas web. 
+
+É uma biblioteca de construção de interfaces altamente performática,
+muito fluida. Interfaces que são reativas a ações do usuário.
+Exemplo: se eu tenho uma listagem de produtos e aí tem um botão pra deletar o produto,
+com o React conseguimos fazer uma ação de deletar esse produto no Node.js (backend) e sem a página carregar de novo ele consegue deletar o produto mantendo
+a página limpa.
+Não precisa recarregar tudo do zero, ele consegue reaproveitar por exemplo um menu.
+
+#Por que TypeScript?
+Ele não é uma linguagem.
+É um conjunto de ferramentas que a gente adiciona junto com o JavaScript.
+Tipagem estática. Tem uma checagem durante o momendo de desenvolvimento
+Ele serve principalmente pra facilitar o processo de desenvolvimento
+e manutenção.
+
+
+#Criar projeto ReactJS:
+Comando:
+
+no site do create-react-app está assim
+yarn create react-app moveit --template typescript
+
+no vídeo ele usou assim:
+yarn create react-app moveit --template=typescript
+
+o create-react-app é uma ferramenta criada pelo Facebook pra facilitar
+o Browser não consegue entender tudo do JavaScript mais moderno
+o React converte o código pra uma maneira que o Browser consegue entender
+com webpack e babel
+
+Inicializar aplicação:
+yarn start
+
+#Entendendo a estrutura do projeto
+
+1) Pasta node_modules : onde fica todas as dependências da nossa aplicação
+Tudo que for instalado de terceiros fica aqui dentro.
+
+2) public : todos os arquivos que são públicos pro usuário final de uma maneira direta
+Obs.: pode deixar só o index.html e o favicon.ico dentro pra iniciar a aplicação
+no index.html pode remover os comentários também
+
+3) src : vai ficar todo o nosso código
+Obs.: pode apagar todos os arquivos CSS, 
+deixar só o App.tsx , index.tsc e o react-app
+
+4) package.json : armazena todas as dependências
+
+5) tsconfig : configurações do typescript
+
+ReactDOM , o dom é a árvore de elementos HTML, esse é pra 
+interface web
+
+Utilizando o método render do ReactDOM ele esta falando pra buscar um elemento que tem um id root
+
+o App é um componente no React
+
+Quando eu uso HTML dentro do JS é chamado de JSX
+
+
+#Conceitos importantes
+
+1) COMPONENTES (components)
+Tudo é feito por componentes no React.
+Tudo que consigo isolar do restante da aplicação é um componente.
+Uma forma de reaproveitar código.
+
+o App é um componente que vai ficar por volta de toda a minha aplicação!
+o App é uma tag do React.
+
+O componente é basicamente uma função que retorna um HTML, com a primeira letra maiúscula.
+Uma função que retorna JSX.
+
+
+2) PROPRIEDADES (props)
+As propriedades são formas da gente passar informações pros nossos componentes;
+por exemplo: quero colocar uma cor diferente em cada botão (component button)
+
+
+
+export function Button(props: ButtonProps) {
+  return (
+    <button type="button">
+    {} 
+    </button>
+  );
+}
+
+As {} dentro do HTML é pra inserir uma variavel do JS
+
+
+No React a gente coloca a estilização num formato de objeto do javascript em {} e dentro das {} a gente vai colocar um objeto do javascript.
+
+
+Tudo que está dentro do componente a gente chama de CHILDREN
+e CHILDREN também é uma propriedade
+
+3) ESTADO (state)
+Um conceito muito importante.
+Você quer armazenar uma informação que vai mudar quando clicar em algum botão ou quando for buscar algo de uma API;
+
+o [] é pq é uma desestruturação
+o useState retorna uma array com duas posições, na primeira é a variável em si e a segunda é uma função pra atualizar essa variável
+
+o setCounter vai criar um novo valor;
+
+
+Um mesmo componente podem ter estados diferentes;
+exemplo: Button
+
+ARQUIVO src>components>Button.tsx
+
+//useState é um hook pra definir nosso estado
+import { useState } from 'react';
+
+//propriedades que meu Botão vai receber:
+//pode usar type ou interface
+interface ButtonProps {
+  color: string;
+  children: string;
+}
+
+export function Button(props: ButtonProps) {
+  const [counter, setCounter] = useState(1) //o [] é pq é uma desestruturação, o useState retorna uma array com duas posições, na primeira é a variável em si e a segunda é uma função pra atualizar a função de counter
+
+  function increment() {
+    setCounter(counter + 1);
+  }
+
+  return (
+    <button
+      type="button"
+      style={{ backgroundColor: props.color }}
+      onClick={increment}
+    >
+      {props.children} <strong>{counter}</strong>
+    </button>
+  );
+}
+ 
+
+
+#Configurando fonte externa
+Fonte de texto: 
+
+tamanhos relativos das fontes ao tamanho da tela do usuário */
+o px é um unidade de medida seca, não é responsiva
+a unidade de medida rem, cada 1 rem equivale ao tamanho da fontsize da aplicação;
+
+o padrão é 16px então se colocarmos 1rem vai ser igual a 16px
+
+
+#Estilos Globais
+Precisa ter boas práticas e fundamentos do CSS, HTML, javascript
+
+
+
+#Componente: ExperienceBar
+
+#rumoaoproximonivel
+
+____________________________________________________
+
+DESVENDANDO O Next.js
+>>>>>> DAY 02 <<<<<<
+
+
+
+#Conhecendo o Next.js
+A gente cria a aplicação usando o create-react-app e depois substitui o create-react-app,
+a gente reaproveita o que criou e agora vamos
+continuar desenvolvendo usando o Next.js
+pode ser considerado um Framework, traz um conjunto de funcionalidades já prontas
+Já traz as rotas prontas;
+
+1) SPA: Single Page Application
+Uma aplicação de uma só página.
+Toda a interface é construida no frontend,
+Quando muda de uma rota pra outra conseguimos manter o que é repetitivo,
+só muda o conteúdo,
+não muda a página, só tem uma página, só a rota
+
+Funciona muito bem pra boa parte das aplicações de React;
+mas hoje, pra ecommerce, blogs, projetos públicos que precisa ser colocado em buscadores tipo Google, Bing,
+eles não aguardam a interface ser construida
+
+por isso, o Next.js foi criado para resolver isso, para nossas aplicações conseguirem ser anexadas nos motores de busca
+
+Sem o JS a aplicação React não é nada,
+ele é o responsável por buscar as informações no backend, responsável por criar a interface..
+
+
+2) SSR: Server-Side-Rendering
+
+O servidor do Next.js é o Node
+ele não é o back-end da nossa aplicação, 
+o Node é um servidor intermediário, entre o back-end e o frontend (react nesse caso)
+é a principal forma de conseguir interpretar o código JS,
+então ele consegue entender React,
+
+o Node vai no back-end buscar os dados (por exemplo, listagem de produtos) aqui ele devolve pro React o HTML e JS
+
+
+3) SSG: Server-Generation
+
+Antigamente era tudo estático, não precisa acessar um banco de dados,
+era HTML, CSS e JS puro
+
+Páginas que mudam com muita frequencia (Tipo G1), o Next gera um arquivo estático pra não buscar no beck-end a cada segundo
+
+
+#Comparação (create-react-app, Gatsby)
+
+
+TRÊS PRINCIPAIS MANEIRAS DE COMEÇAR UM PROJETO REACT
+
+PRIMEIRA) Com o create-react-app temos apenas o SPA
+
+SEGUNDA) Com Gasby é um framework feito especialmente para SSG, para gerar páginas estáticas, tipo blog que lança posts que dificilemnte são mudados
+
+TERCEIRA) Com Next.js ele é um conjunto porque conseguimos ter SPA, SSR e SSG em uma mesma aplicação
+Hoje a maioria utiliza o Next.js
+ 
+
+#MIGRANDO NOSSO PROJETO PARA Next.js:
+Comando: yarn create next-app moveit-next (USEI YARN)
+OU npm create-next-app moveit-next
+
+
+  cd moveit-next
+  yarn dev
+
+
+A estrutura do Next.js: pode excluir a página styles, pasta api,
+
+ARQUIVO pages >index.js >
+é a página principal, é a Home Page da nossa aplicação
+
+ARQUIVO pages >_app.js
+Reaporveitar uma estrtura básica em todas as páginas
+Ele fica por volta de toda a aplicação,
+Sidebar, cabeçalho e footer por exemplo são fixos, então vão aqui!
+
+Mudar para .tsx
+
+Instalar o Typescript no projeto:
+Comando:
+yarn add typescript @types/react @types/react-dom @types/node -D
+
+Tag Head ele coloca tudo no nosso head
+     <Head>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Rajdhani:wght@600&display=swap" rel="stylesheet" />
+      </Head>
+
+O formato de Classe é o recomendado pela documentação do Next
+
+O arquivo _document ele carrega apenas uma vez em uma visita do usuário
+por isso coloco nele as fontes por exemplo
+esse ele é estático
+
+<Main /> onde ele vai mostrar nossas páginas da aplicação
+<NextScript /> são alguns scripts que o Next injeta na nossa aplicação de forma automatizada
+
+
+Tudo que está no _app ele é recalculado quando o usuário muda de página
+
+
+Sass models é uma forma da gente conseguir que um CSS esteja disponível pra um único componente
+Isso é ótimo pra projeto grande com muitas classes
+
+
+
+#Componente: Perfil
+
+#Componente: CompletedChallenges
+
+#Componente: Countdown
+
+FUNCIONALIDADE DE Countdown = click do botão
+Primeiro começa declarando um estado do React
+
+#Criando hook de Countdown
+
+useEffect é um hook pra gente disparar efeitos colaterais
+efeitos colaterais é quando algo mudar ou algo acontecer eu quero disparar algum efeito colateral
+Ele recebe dois parâmetros: o primeiro é o que eu quero executar? e isso sempre será uma função,
+nesse caso uma arrow function ()=> {},
+e o segundo é quando? nesse caso, eu quero executar uma função sempre que o valor de active mudar 
+e vamos coloca-la numa array de dependencias do useEffect [active]
+
+
+CODIGO DO DIA #jornadainfinita
+
+____________________________________________________
+
+CONTEXTO E COMPONENTES
+>>>>>> DAY 03 <<<<<<
+
+Separação da aplicação em componentes menores e aplicaremos o
+conceito de Contextos no React, responsável por compartilhar
+uma informação entre vários componentes em tela.
+
+
+Continuação do Botão:
+
+
+<> 
+</> o fragment é uma tag que não tem nome,
+como se fosse uma div mas esse elemento não vai
+existir no Html, ele serve apenas pra resolver limitação do React que por exemplo 
+
+#Componente: ChallengeBox
+Componente do Desafio = ele vai aparecer na direita quando estiver encerrado o ciclo e o botão ficar desabilitado
+
+
+#Criando CONDICIONAL
+Exemplo:
+
+  { hasActiveChalenge ? (
+    se tem desafio ativo vai aparecer essa div
+    <div></div>
+
+  ) : (
+    se não tem desafio ativo vai aparecer essa div
+    <div></div>
+  ) }
+
+
+
+<button
+   type="button"
+   onClick={}
+>
+
+o type e onClick são ATRIBUTOS
+
+
+
+#CONTEXTOS NO REACT
+Context API - API de Contextos do React
+
+O que são CONTEXTOS?
+são formas de fazer comunicação entre vários componentes da nossa aplicação
+
+são formas da gente continuar compartilhar uma informação entre componentes,
+por isso utilzamos contextos.
+
+
+Vamos criar contexto de desafios!
+Criar pasta contexts
+
+	import { createContext } from 'react';
+
+	export const challengesContext = createContext({});
+
+
+
+No _app.tsx que é o que fica por volta de tudo
+Vou importar o ChallengesContext
+E por volta da aplicação eu vou colocar o componente ChallengesContext e dentro do ChallengesContext vou ter o componente Provider
+
+O Provider 
+Todos os elementos entre o Provider vai ter acesso aos dados armazenados dentro daquele contexto;
+
+Toda a aplicação vai poder ter acesso aos dados do meu contexto de ChallengesContext
+
+ 
+() => void; /* função que não tem nenhum retorno e não recebe nenhum parâmetro */
+
+
+#Context API do React
+a gente consegue compartilhar, ter acesso a diferentes
+informações e funções de diferentes componentes da nossa
+aplicação.
+Resolve a questão de gerenciamento de estado que antes usavam apenas o Redux
+
+Para lidar com estados!
+
+
+#Regras de negócio - o funcionamento da nossa aplicação:
+
+Criar novos desafios: será um arquivo JSON que chama challenges.json
+
+
+
+#Botão FALHEI
+
+Vamos criar uma função resetChallenge dentro do arquivo ChallengeContext
+
+
+#praticafocogrupo
+PRÁTICA, FOCO E GRUPO
+
+____________________________________________________
+
+MELHORANDO A USABILIDADE DA APLICAÇÃO
+>>>>>> DAY 04 <<<<<<
+
+#Estrutura de leveling
+
+LET: usamos let pq ela pode receber um novo valor no futuro 
+
+
+Começar um novo desafio depois que clica no botão Completei
+
+É muito comum um Contexto depender de outro contexto
+
+O CountdownContext depende do ChallengesProvider ele sempre vai vir por
+volta do ChallengesProvider
+
+Quando eu tenho uma informação que estará disponivel em mais telas
+
+
+Como o CountdownContext não estará em todas as páginas então não preciso colocar no _app.tsx
+então vamos colocar no index.tsx
+
+
+
+#Notificação web
+
+Não utilizamos nenhuma lib,
+apenas APIs do próprio browser
+
+arquivo ChallengeContext
+preciso pedir permissão para o usuário para receber notificação
+
+side effects
+efeito colateral = algo que é disparado com algo que já aconteceu na nossa aplicação
+
+
+
+#Tocando áudio no desafio
+
+ /* Tocando áudio no desafio */
+    new Audio('/notification.mp3').play();
+
+o arquivo notification.mp3 está na pasta public
+
+____________________________________________________
+
+PRÓXIMO NÍVEL COM REACT
+>>>>>> DAY 05 <<<<<<
+
+#Fazer o projeto se destacar dos demais:
+Dicas:
+Mudar a cor;
+Completar com outros textos;
+Responsividade para mobile;
+
+
+#Storage via Cookies
+
+Conforme vai finalizando os desafios, quando dá um F5 na página eu perco tudo
+Então vamos fazer uma estrutura de armazenamento no proprio browser
+3 tipos:
+localStorage: consigo armazenar dados de chave e valor,
+ele se mantem mesmo se eu fechar a pagina ou aoertar F5
+é pra apenas um domínio
+
+Session Storage: ele fica somente durante a sessão,
+
+IndexedDB: banco de dados mais completo
+
+Cookies: uma das formas mais antigas da gente coseguir armazenar dados na nossa aplicação,
+consegue usar mais de um domínio,
+ 
+
+Vamos utilizar o Cookies 
+O Next.JS não é só JavaScript no navegador,
+ele tem uma camada intermediária entre o backend e o frontend, que é um servidor Node que fica responsavel por construir a interface
+ 
+O servidor Node não vai ter acesso no LocalStorage, então nesse caso vamos usar o Cookies
+
+Geralmente quando a gente utiliza o Next usamos o Cookies;
+
+
+PRIMEIRO) Vamos salvar os dados do usuário
+
+ChallengesContext onde eu tenho os dados de experiência do usuário
+Vamos utilizar useEffect
+
+
+Pra salvar nos Cookies podemos usar a API nativa do javaScript mas
+Tem umas bibliotecas que facilitam a gente armazenar e recuperar dado dos Cookies
+
+Biblioteca JavaScript pura bem leve que vai da uma API mais amigavel pra eu poder buscar os dados
+Comando:
+yarn add js-cookie
+
+Comando para baixar as dependências de tipagem:
+yarn add @types/js-cookie -D
+
+
+Recuperar os cookies da minha página quando atualizar a página F5
+Vamos utilizar uma funcionalidade do Next.JS: ela só funciona nas pages,
+vamos exportar uma função no nosso index.tsx
+export const getServerSideProps = () => {
+}
+
+
+ChallengesProvider estava no _app.tsx pq esse componente ia tá disponivel em todas as telas
+Agora que as informaççoes estao sendo salvas no cookies entao eu posso colocar ele dentro do index.tsx
+
+
+Cada usuário vai ter seu Storage Cookies!
+
+
+#Modal de level up
+
+Como a gente sabe que o usuario subiu de nivel?
+
+No ChallengesContext temos a função levelUp
+ela é chamada quando o usuario bate a experiencia necessaria
+
+Vamos criar o Modal como um componente React:
+
+
+
+
+#Fazer Deploy da aplicação
+
+Quais são as formas mais comuns?
+1)Utilizar um serviço de deploy especializado em aplicações frontend
+
+-Netflify (plano free)
+
+-Vercel (criadora do Next, e tem plano gratuito)
+ 
+Vamos usar a Vercel nesse projeto!
+
+
+
+#DICAS para levar a aplicação para o próximo nível
+Desafios
+
+Fazer documentação:
+Fazer redme;
+Colocar prints;
+Fazer vídeo;
+
+Fazer aplicação responsiva para mobile:
+
+
+
+#missioncomplete
+
+
+
+
+
+
